@@ -1,0 +1,53 @@
+  <h4 align="center">-- Blog --</h4>
+  <div class="col-md-12">
+    <div class="col-md-2"  style="padding-bottom: 10px">
+      <a routerLink="/admin/blog/0" class="btn btn-info">Add Blog</a>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <select id="inputState" class="form-control" (change)="onChange($event.target.value)">
+          <option selected value="0">---Category---</option>
+          <option *ngFor="let category of categorys" value="{{category.id}}">
+            {{category.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <input type="text" class="form-control" [(ngModel)]="search" placeholder="Search....">
+    </div>
+
+  </div>
+
+  <div class="row col-md-12">
+    <div class="panel panel-primary filterable">
+      <div class="panel-heading">
+        <h3 class="panel-title">Blogs</h3>
+      </div>
+      <table class="table">
+        <thead>
+        <tr class="filters">
+          <th><input type="text" class="form-control" placeholder="id" disabled style="max-width: 70px"></th>
+          <th><input type="text" class="form-control" placeholder="Category" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Title" disabled></th>
+          <th><input type="text" class="form-control" placeholder="Describe" disabled></th>
+          <th><input type="text" class="form-control" placeholder="" disabled></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let blog of blogs">
+          <td >{{blog.id}}</td>
+          <td >{{getCategoryById(blog.categoryId).name}}</td>
+          <td >{{blog.title}}</td>
+          <td >{{blog.describe}}</td>
+          <td>
+            <a routerLink="/admin/blog/{{blog.id}}">edit</a> -
+            <a href="">delete</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

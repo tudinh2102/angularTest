@@ -1,0 +1,38 @@
+a:hover {
+  text-decoration: none;
+}
+
+span {
+  padding-left: 5px;
+  font-size: 80%;
+}
+
+.navbar-default{
+  border: none;
+}
+
+.navbar{
+  background: #2c3e50;
+}
+
+.navbar-brand, .navbar-nav>li>a{
+  color: white;
+}
+
+.navbar-brand:hover, .navbar-nav > li > a:hover, a:hover{
+  color: #18bc9c;
+}
+
+.navbar-nav>.active>a{
+  background-color:#1a242f;
+}
+
+.navbar-right, a{
+  color: white;
+}
+
+@media(max-width: 767px) {
+  .navbar-right{
+    padding-left: 12px;
+  }
+}

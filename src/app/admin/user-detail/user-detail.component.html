@@ -1,0 +1,60 @@
+<h4 align="center">-- {{title}} --</h4>
+<div>
+  <form novalidate (ngSubmit)="onSubmit()" [formGroup]="userForm">
+    <div class="form-group">
+      <label>username:</label>
+      <input *ngIf="username != +0" disabled
+        type="text" class="form-control"  formControlName="username"  placeholder="Enter username">
+      <input *ngIf="username == +0"
+             type="text" class="form-control"  formControlName="username"  placeholder="Enter username">
+    </div>
+
+    <!--loi null-->
+    <div class="col alert alert-danger" role="alert"
+         *ngIf="userForm.get('username')?.errors?.required && userForm.get('username')?.touched">
+      Usernane is required!
+    </div>
+
+    <div class="form-group">
+      <label for="password">password:</label>
+      <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter Password">
+    </div>
+
+    <!--loi null-->
+    <div class="col alert alert-danger" role="alert"
+         *ngIf="userForm.get('password')?.errors?.required && userForm.get('password')?.touched">
+      Password is required!
+    </div>
+
+    <div class="form-group">
+      <label for="fullName">fullname:</label>
+      <input type="text" class="form-control" id="fullName" formControlName="fullName" placeholder="Enter Fullname">
+    </div>
+
+    <!--loi null-->
+    <div class="col alert alert-danger" role="alert"
+         *ngIf="userForm.get('fullName')?.errors?.required && userForm.get('fullName')?.touched">
+      Fullname is required!
+    </div>
+
+    <div class="form-group">
+      <label for="role">Role:</label>
+      <select id="role" class="form-control" formControlName="role">
+        <option value="">---Role---</option>
+        <option value="1">Admin</option>
+        <option value="2">Author</option>
+      </select>
+    </div>
+
+    <!--loi null-->
+    <div class="col alert alert-danger" role="alert"
+         *ngIf="userForm.get('role')?.errors?.required && userForm.get('role')?.touched">
+      Role is required!
+    </div>
+
+    <hr>
+    <div class="form-group" align="center">
+      <button type="submit" class="btn btn-info" [disabled]="userForm.invalid">Submit</button>
+    </div>
+  </form>
+</div>
