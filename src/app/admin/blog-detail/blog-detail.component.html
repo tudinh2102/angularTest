@@ -1,13 +1,15 @@
-<h2 align="center">Vertical (basic) form</h2>
-<a routerLink="/blog" style="padding-left: 10px">back</a>
-<hr>
+<h4 align="center">-- {{title}} --</h4>
 <div>
-  <form action="">
+  <form novalidate (ngSubmit)="onSubmit()" [formGroup]="blogForm">
     <div class="col-md-9">
+      <div class="form-group" *ngIf="id > 0">
+        <label>id:</label>
+        <input  disabled type="text" class="form-control"  formControlName="id">
+      </div>
       <div class="form-group">
         <label for="title">Category:</label>
-        <select id="inputState" class="form-control" (change)="onChange($event.target.value)">
-          <option selected>---Category---</option>
+        <select id="inputState" class="form-control" (change)="onChange($event.target.value) "formControlName="categoryId">
+          <option value="0">---Category---</option>
           <option *ngFor="let category of categorys" value="{{category.id}}">
             {{category.name}}
           </option>
@@ -15,15 +17,15 @@
       </div>
       <div class="form-group">
         <label for="title">Title:</label>
-        <input type="text" class="form-control" id="title" placeholder="Enter Title">
+        <input type="text" class="form-control" id="title" placeholder="Enter Title" formControlName="title">
       </div>
       <div class="form-group">
-        <label for="describe">Describe:</label>
-        <input type="text" class="form-control" id="describe" placeholder="Enter Describe">
+        <label>Describe:</label>
+        <angular-editor formControlName="htmlContent" [config]="editorConfig" rows="7" formControlName="describe"></angular-editor>
       </div>
       <div class="form-group">
-        <label for="describe">Body:</label>
-        <textarea type="text" class="form-control" rows="10"></textarea>
+        <label>Body:</label>
+        <angular-editor formControlName="htmlContent" [config]="editorConfig" rows="15" formControlName="body"></angular-editor>
       </div>
       <hr>
       <div class="form-group" align="center">
@@ -33,15 +35,42 @@
     <div class="col-md-3">
       <div class="form-group">
         <label for="title">Trạng thái:</label>
-        <select class="form-control" (change)="onChange($event.target.value)">
+        <select class="form-control" (change)="onChange($event.target.value)" formControlName="status">
           <option value="1">Hiện</option>
           <option value="0">Ẩn</option>
+          <option *ngIf="roleUser === 1" value="2">Approve</option>
+          <option *ngIf="roleUser === 1" value="3">Unapprove</option>
         </select>
       </div>
       <div class="form-group">
         <label for="title">Img:</label>
         <img src="" alt="" id="imga" style="width: 255px; padding-bottom: 20px">
-        <input type="text" class="form-control"  (change)="setImg($event.target.value)" />
+        <input type="text" class="form-control"  (change)="setImg($event.target.value)" formControlName="image" />
+      </div>
+
+      <div class="form-group" *ngIf="id > 0">
+        <label>View:</label>
+        <input  disabled type="number" class="form-control"  formControlName="view">
+      </div>
+      <div class="form-group" *ngIf="id > 0">
+        <label>Time Approver:</label>
+        <input  disabled type="text" class="form-control"  formControlName="timeApprover">
+      </div>
+      <div class="form-group" *ngIf="id > 0">
+        <label>Time Create:</label>
+        <input  disabled type="text" class="form-control"  formControlName="timeCreate">
+      </div>
+      <div class="form-group" *ngIf="id > 0">
+        <label>User Create:</label>
+        <input  disabled type="text" class="form-control"  formControlName="userCreate">
+      </div>
+      <div class="form-group" *ngIf="id > 0">
+        <label>Time Update:</label>
+        <input  disabled type="text" class="form-control"  formControlName="timeUpdate">
+      </div>
+      <div class="form-group" *ngIf="id > 0">
+        <label>User Update:</label>
+        <input  disabled type="text" class="form-control"  formControlName="userUpdate">
       </div>
     </div>
   </form>

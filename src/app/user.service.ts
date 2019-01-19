@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {fakeUser} from '../models/fake-user';
 import {User} from '../models/user';
 import {Observable, of} from 'rxjs';
+import {Category} from '../models/category';
+import {fakeCategory} from '../models/fake-category';
 
 @Injectable()
 export class UserService {
@@ -51,7 +53,6 @@ export class UserService {
   getData(): void {
     if (!localStorage.getItem('users')) {
       localStorage.setItem('users', JSON.stringify(fakeUser));
-      console.log(JSON.parse(localStorage.getItem('users')));
     }
   }
 
@@ -74,5 +75,16 @@ export class UserService {
       }
     }
     JSON.stringify(localStorage.setItem('users', JSON.stringify(this.users)));
+  }
+
+  // xoa
+  onDelete(username: string): void {
+    const users = JSON.parse(localStorage.getItem('users'));
+
+    const userIndex = users.findIndex(u => u.username === username);
+
+    users.splice(userIndex, 1);
+
+    localStorage.setItem('users', JSON.stringify(users));
   }
 }

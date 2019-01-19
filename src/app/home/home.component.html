@@ -8,23 +8,15 @@
       <h2 style="text-align: center">
         Home
       </h2>
-      <br>a
-      <br>a
-      <br>a
-      <br>a
-      <br>a
-      <br>a
-      <br>a
-      <br>a
-      <br>a
-      <br>a
-      <br>a
-      <br>a
-      <br>a
-      <br>a
-      <br>a
-      <br>a
-      <br>a
+
+      <div *ngFor="let blog of blogs">
+        <div class="col-md-12 blog" align="center">
+          <p align="center">{{blog.title}}</p>
+          <p>{{blog.describe}}</p>
+          <img src="{{blog.image}}" alt="" width="550px" />
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

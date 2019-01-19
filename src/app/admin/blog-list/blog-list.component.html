@@ -1,12 +1,24 @@
-  <h4 align="center">-- Blog --</h4>
-  <div class="col-md-12">
-    <div class="col-md-2"  style="padding-bottom: 10px">
-      <a routerLink="/admin/blog/0" class="btn btn-info">Add Blog</a>
-    </div>
+<h4 align="center">-- Blog --</h4>
+<div class="col-md-12">
+  <div class="col-md-2" style="padding-bottom: 10px">
+    <a routerLink="/admin/blog/0" class="btn btn-info">Add Blog</a>
+  </div>
 
-    <div class="col-md-6">
+  <div class="col-md-6"*ngIf="role === 2">
+    <div class="form-group">
+      <select class="form-control" (change)="onChange($event.target.value)">
+        <option selected value="0">---Category---</option>
+        <option *ngFor="let category of categorys" value="{{category.id}}">
+          {{category.name}}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="role === 1">
+    <div class="col-md-3">
       <div class="form-group">
-        <select id="inputState" class="form-control" (change)="onChange($event.target.value)">
+        <select class="form-control" (change)="onChangeCategory($event.target.value)">
           <option selected value="0">---Category---</option>
           <option *ngFor="let category of categorys" value="{{category.id}}">
             {{category.name}}
@@ -15,39 +27,73 @@
       </div>
     </div>
 
-    <div class="col-md-4">
-      <input type="text" class="form-control" [(ngModel)]="search" placeholder="Search....">
-    </div>
-
-  </div>
-
-  <div class="row col-md-12">
-    <div class="panel panel-primary filterable">
-      <div class="panel-heading">
-        <h3 class="panel-title">Blogs</h3>
+    <div class="col-md-3">
+      <div class="form-group">
+        <select class="form-control" (change)="onChangeUser($event.target.value)">
+          <option selected value="0">---User---</option>
+          <option *ngFor="let user of users" value="{{user.username}}">
+            {{user.fullName}}
+          </option>
+        </select>
       </div>
-      <table class="table">
-        <thead>
-        <tr class="filters">
-          <th><input type="text" class="form-control" placeholder="id" disabled style="max-width: 70px"></th>
-          <th><input type="text" class="form-control" placeholder="Category" disabled></th>
-          <th><input type="text" class="form-control" placeholder="Title" disabled></th>
-          <th><input type="text" class="form-control" placeholder="Describe" disabled></th>
-          <th><input type="text" class="form-control" placeholder="" disabled></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let blog of blogs">
-          <td >{{blog.id}}</td>
-          <td >{{getCategoryById(blog.categoryId).name}}</td>
-          <td >{{blog.title}}</td>
-          <td >{{blog.describe}}</td>
-          <td>
-            <a routerLink="/admin/blog/{{blog.id}}">edit</a> -
-            <a href="">delete</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
     </div>
   </div>
+
+
+  <div class="col-md-4">
+    <input type="text" class="form-control" [(ngModel)]="search" placeholder="Search....">
+  </div>
+
+</div>
+
+<div class="row col-md-12">
+  <div class="panel panel-primary filterable">
+    <div class="panel-heading">
+      <h3 class="panel-title">Blogs</h3>
+    </div>
+    <table class="table">
+      <thead>
+      <tr class="filters">
+        <th><input type="text" class="form-control" placeholder="id" disabled style="max-width: 70px"></th>
+        <th><input type="text" class="form-control" placeholder="Category" disabled></th>
+        <th><input type="text" class="form-control" placeholder="Title" disabled></th>
+        <th><input type="text" class="form-control" placeholder="Describe" disabled></th>
+        <th><input type="text" class="form-control" placeholder="UserCreate" disabled></th>
+        <th><input type="text" class="form-control" placeholder="Status" disabled></th>
+        <th><input type="text" class="form-control" placeholder="" disabled></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let blog of blogs | orderBy: order:true">
+        <td>{{blog.id}}</td>
+        <td>{{getCategoryById(blog.categoryId).name}}</td>
+        <td>{{blog.title}}</td>
+        <td>{{blog.describe}}</td>
+        <td>{{blog.userCreate}}</td>
+        <td>
+          <span *ngIf="blog.status === 1">Hiện</span>
+          <span *ngIf="blog.status === 0">Ẩn</span>
+          <span *ngIf="blog.status === 2">Approve</span>
+          <span *ngIf="blog.status === 3">Unapprove</span>
+
+        </td>
+        <td>
+          <a routerLink="/admin/blog/{{blog.id}}">edit</a> -
+          <button style="border: none" (click)="onDelete(blog.id)">delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-footer p-0" align="center">
+    <nav aria-label="...">
+      <ul class="pagination justify-content-end mt-3 mr-3">
+        <li class="page-item" *ngFor="let i of countPage">
+            <a class="page-link" href="/admin/p/{{i}}">{{i}}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+</div>

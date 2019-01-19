@@ -43,7 +43,7 @@
         <td *ngIf="user.role === 2">Author</td>
         <td>
           <a routerLink="/admin/user/{{user.username}}">edit</a> -
-          <a href="">delete</a>
+          <button style="border: none" (click)="onDelete(user.username)">delete</button>
         </td>
       </tr>
       </tbody>

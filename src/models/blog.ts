@@ -2,7 +2,6 @@ import {User} from './user';
 
 export class Blog {
   categoryId: number;
-
   id: number;
   title: string;
   describe: string; // 1 - neu nguoi dung nhap -> in ra --- 2 - k dien bat 30 tu dau tien cua body
@@ -10,9 +9,9 @@ export class Blog {
   status: number; // private-public-approved
   timeApprover: Date;
   timeCreate: Date;
-  userCreate: User;
+  userCreate: string;
   timeUpdate: Date; // gan nhat
-  userUpdate: User; // gan nhat
-  vew: number;
+  userUpdate: string; // gan nhat
+  view: number;
   image: string;
 }

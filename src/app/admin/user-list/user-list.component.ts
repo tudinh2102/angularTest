@@ -20,7 +20,6 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.getUsersFromervice();
-    console.log(this.users);
   }
 
   getUsersFromervice(): void {
@@ -33,6 +32,12 @@ export class UserListComponent implements OnInit {
     } else {
       this.userService.getListUserByRole(id).subscribe(users => this.users = users);
     }
+  }
+
+  onDelete(username: string): void {
+    this.userService.onDelete(username);
+
+    location.replace('admin/user-list');
   }
 
 }

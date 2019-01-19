@@ -12,12 +12,16 @@ import {fakeCategory} from '../../../models/fake-category';
 export class HeaderComponent implements OnInit {
 
   user: User;
+  users: User[];
   categoryList = fakeCategory;
 
-  constructor(public userService: UserService) {
+  constructor(
+    public userService: UserService
+  ) {
   }
 
   ngOnInit() {
+    this.loadUser();
   }
 
   checkLogin(): boolean {
@@ -30,6 +34,10 @@ export class HeaderComponent implements OnInit {
 
   logOut(): void {
     this.userService.onLogout();
+  }
+
+  loadUser(): void {
+    this.userService.getuserList().subscribe((userList) => this.users = userList);
   }
 
 }

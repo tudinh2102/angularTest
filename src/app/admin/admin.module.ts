@@ -7,6 +7,9 @@ import {BlogListComponent} from './blog-list/blog-list.component';
 import {BlogDetailComponent} from './blog-detail/blog-detail.component';
 import {UserListComponent} from './user-list/user-list.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
+import {HttpClientModule} from '@angular/common/http';
+import {AngularEditorModule} from '@kolkov/angular-editor';
+import {OrderModule} from 'ngx-order-pipe';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import {UserDetailComponent} from './user-detail/user-detail.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    HttpClientModule,
+    AngularEditorModule,
+    OrderModule
   ],
   providers: [
     // service
