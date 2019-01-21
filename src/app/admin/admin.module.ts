@@ -10,6 +10,7 @@ import {UserDetailComponent} from './user-detail/user-detail.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AngularEditorModule} from '@kolkov/angular-editor';
 import {OrderModule} from 'ngx-order-pipe';
+import {SetupWebsiteComponent} from './setup-website/setup-website.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {OrderModule} from 'ngx-order-pipe';
     BlogListComponent,
     BlogDetailComponent,
     UserListComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    SetupWebsiteComponent
   ],
   imports: [
     CommonModule,

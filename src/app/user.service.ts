@@ -1,9 +1,6 @@
 import {Injectable} from '@angular/core';
-import {fakeUser} from '../models/fake-user';
 import {User} from '../models/user';
 import {Observable, of} from 'rxjs';
-import {Category} from '../models/category';
-import {fakeCategory} from '../models/fake-category';
 
 @Injectable()
 export class UserService {
@@ -15,8 +12,6 @@ export class UserService {
   }
 
   checkLogin(us: string, pw: string): boolean {
-    this.getData();
-
     this.getUser(us, pw).subscribe((user) => this.userLogin = user);
 
     if (this.userLogin.toString()) { // login thành công
@@ -27,7 +22,6 @@ export class UserService {
   }
 
   getuserList(): Observable<User[]> {
-    this.getData();
 
     return of(JSON.parse(localStorage.getItem('users')));
   }
@@ -47,13 +41,6 @@ export class UserService {
   // kiểm tra trong localStorage
   getUser(us: string, pw: string): Observable<User> {
     return of(JSON.parse(localStorage.getItem('users')).filter((user) => user.username === us && user.password === pw));
-  }
-
-  // nếu local chưa có data thì get từ fake
-  getData(): void {
-    if (!localStorage.getItem('users')) {
-      localStorage.setItem('users', JSON.stringify(fakeUser));
-    }
   }
 
   // them

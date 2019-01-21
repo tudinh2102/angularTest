@@ -6,6 +6,7 @@ import {UserListComponent} from './user-list/user-list.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
 import {AdminComponent} from './admin.component';
 import {AuthGuard} from '../auth.guard';
+import {SetupWebsiteComponent} from './setup-website/setup-website.component';
 
 const adminRoutes: Routes = [
 
@@ -42,6 +43,11 @@ const adminRoutes: Routes = [
         path: 'user/:username',
         canActivate: [AuthGuard],
         component: UserDetailComponent
+      },
+      {
+        path: 'setup',
+        canActivate: [AuthGuard],
+        component: SetupWebsiteComponent
       }
     ]
   }

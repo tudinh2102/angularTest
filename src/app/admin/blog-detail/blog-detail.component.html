@@ -15,33 +15,59 @@
           </option>
         </select>
       </div>
+
       <div class="form-group">
         <label for="title">Title:</label>
         <input type="text" class="form-control" id="title" placeholder="Enter Title" formControlName="title">
       </div>
+      <!--loi null-->
+      <div class="col alert alert-danger" role="alert"
+           *ngIf="blogForm.get('title')?.errors?.required && blogForm.get('title')?.touched">
+        Title is required!
+      </div>
+
       <div class="form-group">
         <label>Describe:</label>
         <angular-editor formControlName="htmlContent" [config]="editorConfig" rows="7" formControlName="describe"></angular-editor>
       </div>
+      <!--loi null-->
+      <div class="col alert alert-danger" role="alert"
+           *ngIf="blogForm.get('describe')?.errors?.required && blogForm.get('describe')?.touched">
+        describe is required!
+      </div>
+
       <div class="form-group">
         <label>Body:</label>
         <angular-editor formControlName="htmlContent" [config]="editorConfig" rows="15" formControlName="body"></angular-editor>
       </div>
+      <!--loi null-->
+      <div class="col alert alert-danger" role="alert"
+           *ngIf="blogForm.get('body')?.errors?.required && blogForm.get('body')?.touched">
+        body is required!
+      </div>
+
       <hr>
       <div class="form-group" align="center">
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit"   class="btn btn-default btn btn-info">Submit</button>
       </div>
     </div>
     <div class="col-md-3">
       <div class="form-group">
         <label for="title">Trạng thái:</label>
         <select class="form-control" (change)="onChange($event.target.value)" formControlName="status">
-          <option value="1">Hiện</option>
-          <option value="0">Ẩn</option>
-          <option *ngIf="roleUser === 1" value="2">Approve</option>
-          <option *ngIf="roleUser === 1" value="3">Unapprove</option>
+          <option value="1">Public</option>
+          <option value="0">Private</option>
         </select>
       </div>
+      <div class="form-group" *ngIf="roleUser === 1">
+        <label for="title">Approve:</label>
+        <select class="form-control" (change)="onChange($event.target.value)" formControlName="approve">
+          <option value="1">Approve</option>
+          <option value="2">Unapprove</option>
+          <option value="3">null</option>
+        </select>
+      </div>
+
       <div class="form-group">
         <label for="title">Img:</label>
         <img src="" alt="" id="imga" style="width: 255px; padding-bottom: 20px">

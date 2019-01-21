@@ -70,6 +70,7 @@ export class BlogDetailComponent implements OnInit {
         describe: this.fb.control('', [Validators.required]),
         body: this.fb.control('', [Validators.required]),
         status: this.fb.control(0, [Validators.required]),
+        approve: this.fb.control(3, [Validators.required]),
         timeApprover: this.fb.control('', [Validators.required]),
         timeCreate: this.fb.control('', [Validators.required]),
         userCreate: this.fb.control('', [Validators.required]),
@@ -86,6 +87,7 @@ export class BlogDetailComponent implements OnInit {
         describe: this.fb.control(this.blog.describe, [Validators.required]),
         body: this.fb.control(this.blog.body, [Validators.required]),
         status: this.fb.control(+this.blog.status, [Validators.required]),
+        approve: this.fb.control(+this.blog.approve, [Validators.required]),
         timeApprover: this.fb.control(this.blog.timeApprover, [Validators.required]),
         timeCreate: this.fb.control(this.blog.timeCreate, [Validators.required]),
         userCreate: this.fb.control(this.blog.userCreate, [Validators.required]),
@@ -132,6 +134,7 @@ export class BlogDetailComponent implements OnInit {
     blog.describe = this.blogForm.value['describe'];
     blog.body = this.blogForm.value['body'];
     blog.status = +this.blogForm.value['status'];
+    blog.approve = +this.blogForm.value['approve'];
     blog.timeApprover = this.blogForm.value['timeApprover'];
     blog.timeCreate = this.blogForm.value['timeCreate'];
     blog.userCreate = this.blogForm.value['userCreate'];

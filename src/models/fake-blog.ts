@@ -17,10 +17,11 @@ export const faceBlog: Blog[] = [
       'nghĩ, có thể làm những điều mày tin Có thể sống để xả thân mình với những ý tưởng mà họ từng khinh Mày có thể ' +
       'điên loạn và phá cách suy nghĩ điên rồ và phá phách Một lần được sống thể hiện chính mình, một lần để đời và viết sách ',
     'status': 1,
+    'approve': 1,
     'timeApprover': new Date(),
     'timeCreate': new Date(),
     'userCreate': 'admin',
-    'timeUpdate': new Date(),
+    'timeUpdate': null,
     'userUpdate': null,
     'view': 1,
     'image': null,
@@ -43,10 +44,11 @@ export const faceBlog: Blog[] = [
       'đây là phôi pha Cơn mơ khi xưa hai ta trông mong hôm nay xem như đã trôi xa Dù rằng chẳng muốn bao giờ, thật ' +
       'lòng chẳng muốn thế bao giờ Nhưng đành thôi cũng phải cố quên, một mình anh khóc thương hết đêm... ',
     'status': 1,
+    'approve': 1,
     'timeApprover': new Date(),
     'timeCreate': new Date(),
     'userCreate': 'admin',
-    'timeUpdate': new Date(),
+    'timeUpdate': null,
     'userUpdate': null,
     'view': 1,
     'image': null,
@@ -67,10 +69,11 @@ export const faceBlog: Blog[] = [
       'điều mày nghĩ, có thể làm những điều mày tin Có thể sống để xả thân mình với những ý tưởng mà họ từng khinh ' +
       'Mày có thể điên loạn và phá cách suy nghĩ điên rồ và phá phách Một lần được sống thể hiện chính mình, một lần để đời và viết sách ',
     'status': 1,
+    'approve': 1,
     'timeApprover': new Date(),
     'timeCreate': new Date(),
     'userCreate': 'admin',
-    'timeUpdate': new Date(),
+    'timeUpdate': null,
     'userUpdate': null,
     'view': 1,
     'image': null,
@@ -92,12 +95,12 @@ export const faceBlog: Blog[] = [
       'yêu thương ta từng xây) Nước mắt rơi...(ướt) (vùi chôn con tim anh từ đây) Coi như bao nhiêu năm qua ' +
       'chuyện tình đôi ta đến đây là phôi pha Cơn mơ khi xưa hai ta trông mong hôm nay xem như đã trôi xa Dù rằng ' +
       'chẳng muốn bao giờ, thật lòng chẳng muốn thế bao giờ Nhưng đành thôi cũng phải cố quên, một mình anh khóc thương hết đêm... ',
-
     'status': 1,
+    'approve': 1,
     'timeApprover': new Date(),
     'timeCreate': new Date(),
     'userCreate': 'admin',
-    'timeUpdate': new Date(),
+    'timeUpdate': null,
     'userUpdate': null,
     'view': 1,
     'image': null,
@@ -117,12 +120,12 @@ export const faceBlog: Blog[] = [
       'tự vượt khó Và khi gặp gió phải biết căng buồm vì đời còn lắm điều rủi ro Mày có thể làm những điều mày nghĩ, có ' +
       'thể làm những điều mày tin Có thể sống để xả thân mình với những ý tưởng mà họ từng khinh Mày có thể điên loạn và ' +
       'phá cách suy nghĩ điên rồ và phá phách Một lần được sống thể hiện chính mình, một lần để đời và viết sách ',
-
     'status': 1,
+    'approve': 1,
     'timeApprover': new Date(),
     'timeCreate': new Date(),
     'userCreate': 'admin',
-    'timeUpdate': new Date(),
+    'timeUpdate': null,
     'userUpdate': null,
     'view': 1,
     'image': null,
@@ -145,12 +148,12 @@ export const faceBlog: Blog[] = [
       'như bao nhiêu năm qua chuyện tình đôi ta đến đây là phôi pha Cơn mơ khi xưa hai ta trông mong hôm nay xem ' +
       'như đã trôi xa Dù rằng chẳng muốn bao giờ, thật lòng chẳng muốn thế bao giờ Nhưng đành thôi cũng phải cố ' +
       'quên, một mình anh khóc thương hết đêm... ',
-
     'status': 1,
+    'approve': 1,
     'timeApprover': new Date(),
     'timeCreate': new Date(),
     'userCreate': 'admin',
-    'timeUpdate': new Date(),
+    'timeUpdate': null,
     'userUpdate': null,
     'view': 1,
     'image': null,

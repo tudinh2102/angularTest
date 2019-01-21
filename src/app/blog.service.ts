@@ -24,58 +24,9 @@ export class BlogService {
     private http: HttpClient) {
   }
 
-  getListBlog(indexPage: number, coutBlog: number): Observable<Blog[]> {
-    // this.getDataAll();
-    this.getDataAll();
-
-    const blogList = null;
-    const username = JSON.parse(localStorage.getItem('login'))[0].username;
-
-    // xu ly dieu kien
-    if (+JSON.parse(localStorage.getItem('login'))[0].role === 1) {
-      // @ts-ignore
-      blogList = JSON.parse(localStorage.getItem('blogs')).filter(blog => blog.status > 0 || blog.userCreate === username);
-    } else {
-      // @ts-ignore
-      blogList = JSON.parse(localStorage.getItem('blogs')).filter(blog => blog.userCreate === username);
-    }
-
-    // phan trang
-    const coutPage = blogList.length % coutBlog;
-    if (blogList.length / coutBlog > coutPage) { // neu 1,1 > 1 -> co 2 page
-      // @ts-ignore
-      coutPage += 1;
-    }
-    if (indexPage > coutPage) {
-      indexPage = coutPage;
-    }
-    const end = blogList.length - (indexPage - 1) * coutBlog;
-    const begin = end - coutBlog;
-    if (begin < 0) {
-      // @ts-ignore
-      begin = 0;
-    }
-
-    this.blogs = [];
-    for (let i = begin; i < end; i++) {
-      this.blogs.push(blogList[i]);
-    }
-
-    return of(this.blogs);
-  }
-
   getBlogById(id: number): Observable<Blog> {
     return of(JSON.parse(localStorage.getItem('blogs')).filter(blog => blog.id === +id));
   }
-
-  getListBlogBycategoryId(id: number): Observable<Blog[]> {
-    return of(JSON.parse(localStorage.getItem('blogs')).filter(blog => blog.categoryId === +id && blog.status >= 1));
-  }
-
-  getListBlogByUser(username: string): Observable<Blog[]> {
-    return of(JSON.parse(localStorage.getItem('blogs')).filter(blog => blog.userCreate === username && blog.status >= 1));
-  }
-
 
   // nếu local chưa có data thì get từ fake
   getDataAll(): void {
@@ -84,36 +35,69 @@ export class BlogService {
     }
   }
 
-  // data trong phan trang
-  getPage(coutBlog: number): number {
+  getData(categoryId: number, username: string, approve: number, indexPage: number, countBlog: number): Observable<Blog[]> {
 
-    const blogList = null;
-    const username = JSON.parse(localStorage.getItem('login'))[0].username;
+    const blogList = this.getDataFilter(categoryId, username, approve).sort((a: Blog, b: Blog) => {
+      return b.id - a.id;
+    });
 
-    // xu ly dieu kien
-    if (+JSON.parse(localStorage.getItem('login'))[0].role === 1) {
-      // @ts-ignore
-      blogList = JSON.parse(localStorage.getItem('blogs')).filter(blog => blog.status > 0 || blog.userCreate === username);
-    } else {
-      // @ts-ignore
-      blogList = JSON.parse(localStorage.getItem('blogs')).filter(blog => blog.userCreate === username);
+    console.log(blogList);
+
+    if (blogList.length === 0) {
+      return of([]);
     }
 
-    // tong so trang
-    const coutPage = blogList.length / coutBlog;
-    if (blogList.length / coutBlog > blogList.length % coutBlog) { // neu 1,1 > 1 -> co 2 page
-      // @ts-ignore
-      coutPage += 1;
-    }
+    // xu ly du lieu phan trang
+    const begin = (indexPage - 1) * countBlog;
+    const end = (indexPage * countBlog) - 1;
 
-    if (coutPage < 1) {
+    return of(blogList.slice(begin, end));
+  }
+
+  getCountPage(categoryId: number, username: string, approve: number, indexPage: number, countBlog: number): number {
+
+    const blogList = this.getDataFilter(categoryId, username, approve);
+
+    const coutPage = 1;
+
+    // xu ly phan trang
+    if (blogList.length > countBlog) {
       // @ts-ignore
-      coutPage = 1;
+      coutPage = blogList.length % countBlog;
+
+      if (blogList.length / countBlog > coutPage) { // neu 1,1 > 1 -> co 2 page
+        // @ts-ignore
+        coutPage += 1;
+      }
     }
 
     return coutPage;
+
   }
 
+  getDataFilter(categoryId: number, username: string, approve: number): Blog[] {
+    this.getDataAll();
+
+    // xu ly loc theo 3 gia tri
+    const us = JSON.parse(localStorage.getItem('login'))[0].username;
+    // @ts-ignore
+    const blogList = JSON.parse(localStorage.getItem('blogs')).filter(blog => blog.status > 0 || blog.userCreate === us);
+
+    if (+categoryId !== 0) {
+      // @ts-ignore
+      blogList = blogList.filter(blog => blog.categoryId === +categoryId);
+    }
+    if (+username !== 0) {
+      // @ts-ignore
+      blogList = blogList.filter(blog => blog.userCreate === username);
+    }
+    if (+approve !== 0) {
+      // @ts-ignore
+      blogList = blogList.filter(blog => blog.approve === +approve);
+    }
+
+    return blogList;
+  }
 
   // them
   onAdd(blog: Blog): void {

@@ -18,7 +18,7 @@ export class BlogListComponent implements OnInit {
 
   role = JSON.parse(localStorage.getItem('login'))[0].role;
 
-  id: number;
+  indexPage: number;
   coutBlog = 10;
   countPage: number[];
   order = 'id';
@@ -26,6 +26,10 @@ export class BlogListComponent implements OnInit {
   blogs: Blog[];
   users: User[];
   search = '';
+
+  categoryId = 0;
+  username = '0';
+  approve = 0;
 
   constructor(
     private categoryService: CategoryService,
@@ -36,51 +40,57 @@ export class BlogListComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    if (JSON.parse(localStorage.getItem('login'))[0].role > 1) {
+      this.username = JSON.parse(localStorage.getItem('login'))[0].username;
+    }
+
     this.getBlogFormRoute();
 
     this.getCategorysFromService();
     this.getBlogsFromService();
     this.getUsersFromService();
+  }
 
+  onChangeCategory(category: number) {
+    this.categoryId = category;
+    this.getBlogsFromService();
+  }
+
+  onChangeUser(username: string) {
+    this.username = username;
+    this.getBlogsFromService();
+  }
+
+  onChangeApprove(approve: number) {
+    this.approve = approve;
+    this.getBlogsFromService();
+  }
+
+  getBlogsFromService(): void {
+    this.blogService.getData(this.categoryId, this.username, this.approve, this.indexPage, this.coutBlog)
+      .subscribe(blogs => this.blogs = blogs);
+
+    this.getPage();
+  }
+
+  getPage(): void {
     this.countPage = [];
-    for (let i = 1; i <= this.blogService.getPage(this.coutBlog); i++) {
+    for (let i = 1; i <= this.blogService.getCountPage(this.categoryId, this.username, this.approve, this.indexPage, this.coutBlog); i++) {
       this.countPage.push(i);
     }
   }
 
-  onChangeCategory(categor: number) {
-    if (+categor === 0) {
-      this.getBlogsFromService();
-    } else {
-      this.blogService.getListBlogBycategoryId(categor).subscribe(blogs => this.blogs = blogs);
-    }
-  }
-
-  onChangeUser(username: string) {
-    if (+username === 0) {
-      this.getBlogsFromService();
-    } else {
-      this.blogService.getListBlogByUser(username).subscribe(blogs => this.blogs = blogs);
-    }
-  }
-
-
-  // onSearch(): void {
-  //   console.log(this.search);
-  //   this.blogService.searchLikeTitle(this.blogService.getListBlogBycategoryId(categor).
-  //   subscribe(cates => this.blogs = cates);this.search).subscribe(blogs => this.blogs = blogs);
-  // }
+  //
 
   getCategoryById(id: number): Category {
     return this.categorys.find(cate => cate.id === id);
   }
 
+  //
+
   getCategorysFromService(): void {
     this.categoryService.getCategoryList().subscribe((cates) => this.categorys = cates);
-  }
-
-  getBlogsFromService(): void {
-    this.blogService.getListBlog(this.id, this.coutBlog).subscribe((blogs => this.blogs = blogs));
   }
 
   getUsersFromService(): void {
@@ -94,12 +104,18 @@ export class BlogListComponent implements OnInit {
   }
 
   getBlogFormRoute(): void {
-    this.id = +this.route.snapshot.paramMap.get('id'); // + chuyển string thành số
-    if (!this.id || this.id < 0) {
-      this.id = 1;
+    this.indexPage = +this.route.snapshot.paramMap.get('id'); // + chuyển string thành số
+    if (!this.indexPage || this.indexPage < 0) {
+      this.indexPage = 1;
     }
 
-    console.log('page = ' + this.id);
+    console.log('page = ' + this.indexPage);
+  }
+
+  nextPage(indexPage: string): void {
+    this.indexPage = +indexPage;
+
+    this.getBlogsFromService();
   }
 
 }
