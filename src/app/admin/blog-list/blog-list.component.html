@@ -81,7 +81,7 @@
         <td>{{getCategoryById(blog.categoryId).name}}</td>
         <td>{{blog.title}}</td>
         <td>{{blog.userCreate}}</td>
-        <td>{{blog.timeCreate | date}}</td>
+        <td>{{blog.timeCreate | date:'dd/MM/yyyy HH:mm:ss' }}</td>
         <td>
           <span *ngIf="blog.status === 1">Public</span>
           <span *ngIf="blog.status === 0">Private</span>
@@ -103,7 +103,7 @@
   <div class="card-footer p-0" align="center">
     <nav aria-label="...">
       <ul class="pagination justify-content-end mt-3 mr-3">
-        <li class="page-item" *ngFor="let i of countPage">
+        <li class="page-item {{i === indexPage ? 'active' : ''}}" *ngFor="let i of countPage">
             <a class="page-link" (click)="nextPage($event.target.innerText)" routerLink="/admin/p/{{i}}">{{i}}</a>
         </li>
       </ul>

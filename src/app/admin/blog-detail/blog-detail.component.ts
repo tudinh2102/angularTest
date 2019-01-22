@@ -64,7 +64,7 @@ export class BlogDetailComponent implements OnInit {
 
     if (this.id === 0) { // them
       this.blogForm = this.fb.group({
-        categoryId: this.fb.control(0, [Validators.required]),
+        categoryId: this.fb.control(1, [Validators.required]),
         id: this.fb.control(0, [Validators.required]),
         title: this.fb.control('', [Validators.required]),
         describe: this.fb.control('', [Validators.required]),
@@ -117,6 +117,11 @@ export class BlogDetailComponent implements OnInit {
       // @ts-ignore
       blog = this.loadDataForm();
       blog.userUpdate = JSON.parse(localStorage.getItem('login'))[0].username;
+
+      if (blog.approve === 1) {
+        blog.timeApprover = new Date();
+      }
+
       blog.timeUpdate = new Date();
 
       this.blogService.onEdit(blog);
@@ -169,6 +174,11 @@ export class BlogDetailComponent implements OnInit {
         location.replace('/admin');
       }
     }
+  }
+
+  onPreview(): void {
+    const  blog = this.loadDataForm();
+    console.log(blog);
   }
 
 }

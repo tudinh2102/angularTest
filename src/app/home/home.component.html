@@ -4,21 +4,64 @@
     <div class="col-md-3 col-xs-12 left">
       <app-category></app-category>
     </div>
-    <div class="col-md-9 col-xs-12 right">
+    <div class="col-md-7 col-xs-12 right">
+
       <h2 style="text-align: center">
-        Home
+        {{setup.title}}
       </h2>
 
       <div *ngFor="let blog of blogs">
         <div class="col-md-12 blog" align="center">
-          <p align="center">{{blog.title}}</p>
-          <p>{{blog.describe}}</p>
-          <img src="{{blog.image}}" alt="" width="550px" />
+          <a routerLink="/view-blog/{{blog.id}}">
+            <img class="img-blog" src="{{blog.image}}" alt="" width="650px"/>
+          </a>
+          <div class="noi-dung">
+            <p align="left">
+              <a routerLink="/category-blog/{{blog.categoryId}}"><span>{{getCategoryById(blog.categoryId).name}}</span></a>
+              -
+              <a routerLink="/author-blog/{{blog.userCreate}}"><span>{{blog.userCreate}}</span></a>
+            </p>
+            <a routerLink="/view-blog/{{blog.id}}"><h3 align="center">{{blog.title}}</h3></a>
+            <p align="left"><i>views: {{blog.view}}</i> -
+              <span align="left"
+                    style="padding-left: 3px"><i>views: {{blog.timeCreate | date: setup.dateFormat}}</i></span>
+            </p>
+            <p align="left">{{blog.describe}} ... </p>
+          </div>
         </div>
       </div>
 
+      <!-- in case you want to show empty message -->
+      <p *ngIf="(blogs).length === 0">
+      Không có blog nào phù hợp
+      </p>
+
+    </div>
+    <div class="col-md-2" style="padding-top: 82px">
+      <div class="form-group language">
+        <h4 >{{'demo.title' | translate}}</h4>
+        <ul>
+          <li><button style="border: none" (click)="switchLanguage('vie')">VIE</button></li>-
+          <li><button style="border: none" (click)="switchLanguage('en')">ENG</button></li>
+        </ul>
+      </div>
+      <div class="form-group">
+        <input type="text" [(ngModel)]="search" (change)="onSearch($event.target.value)" class="form-control" placeholder="search ...">
+      </div>
     </div>
   </div>
+</div>
+
+<div class="card-footer p-0" align="center">
+  <nav aria-label="...">
+    <ul class="pagination justify-content-end mt-3 mr-3">
+      <li *ngFor="let i of countPage" class="page-item {{i === indexPage ? 'active' : ''}}">
+        <a *ngIf="home" class="page-link" routerLink="/home/{{i}}">{{i}}</a>
+        <a *ngIf="categoryId > 0" class="page-link" routerLink="/category-blog/{{categoryId}}/p/{{i}}">{{i}}</a>
+        <a *ngIf="username !== '0'" class="page-link" routerLink="/author-blog/{{username}}/p/{{i}}">{{i}}</a>
+      </li>
+    </ul>
+  </nav>
 </div>
 
 <app-footer></app-footer>

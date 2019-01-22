@@ -41,15 +41,13 @@ export class BlogService {
       return b.id - a.id;
     });
 
-    console.log(blogList);
-
     if (blogList.length === 0) {
       return of([]);
     }
 
     // xu ly du lieu phan trang
     const begin = (indexPage - 1) * countBlog;
-    const end = (indexPage * countBlog) - 1;
+    const end = (indexPage * countBlog);
 
     return of(blogList.slice(begin, end));
   }
@@ -58,20 +56,7 @@ export class BlogService {
 
     const blogList = this.getDataFilter(categoryId, username, approve);
 
-    const coutPage = 1;
-
-    // xu ly phan trang
-    if (blogList.length > countBlog) {
-      // @ts-ignore
-      coutPage = blogList.length % countBlog;
-
-      if (blogList.length / countBlog > coutPage) { // neu 1,1 > 1 -> co 2 page
-        // @ts-ignore
-        coutPage += 1;
-      }
-    }
-
-    return coutPage;
+    return Math.ceil(blogList.length / countBlog);
 
   }
 

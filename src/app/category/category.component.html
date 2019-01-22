@@ -1,5 +1,5 @@
 <ul>
   <li *ngFor="let category of categorys">
-    <a href="">{{category.name}}</a>
+    <a routerLink="/category-blog/{{category.id}}">{{category.name}}</a>
   </li>
 </ul>
