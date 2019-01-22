@@ -43,6 +43,10 @@ export class HomeComponent implements OnInit {
     // localStorage.removeItem('users');
     // localStorage.removeItem('blogs');
     // localStorage.removeItem('setup');
+
+    // xoa doi tuọng preview
+    localStorage.removeItem('previewBlog');
+
     console.log('userLogin: ');
     console.log(JSON.parse(localStorage.getItem('login')));
     console.log('userList: ');

@@ -178,7 +178,7 @@ export class BlogDetailComponent implements OnInit {
 
   onPreview(): void {
     const  blog = this.loadDataForm();
-    console.log(blog);
+    localStorage.setItem('previewBlog', JSON.stringify(blog));
   }
 
 }
