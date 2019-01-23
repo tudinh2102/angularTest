@@ -1,0 +1,37 @@
+<div class="container">
+  <h2 align="center">Trang quản trị blog</h2>
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" routerLink="/">Về Trang Chủ</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active" *ngIf="role === 1">
+            <a routerLink="/admin/setup">Cấu Hình Websites <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="active" *ngIf="role === 1">
+            <a routerLink="/admin/user-list">Quản trị User <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="active"><a routerLink="/admin">Quản trị Blog <span class="sr-only">(current)</span></a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <hr>
+
+  <router-outlet></router-outlet>
+
+</div>

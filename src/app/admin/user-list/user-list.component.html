@@ -1,0 +1,52 @@
+<h4 align="center">-- User --</h4>
+<div class="col-md-12">
+  <div class="col-md-2" style="padding-bottom: 10px">
+    <a routerLink="/admin/user/0" class="btn btn-info">New User</a>
+  </div>
+
+  <div class="col-md-6">
+    <div class="form-group">
+      <select id="inputState" class="form-control" (change)="onChange($event.target.value)">
+        <option selected value="0">---Role---</option>
+        <option value="1">Admin</option>
+        <option value="2">Author</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <input type="text" class="form-control" [(ngModel)]="search" placeholder="Search username....">
+  </div>
+
+</div>
+
+
+<div class="row col-md-12">
+  <div class="panel panel-primary filterable">
+    <div class="panel-heading">
+      <h3 class="panel-title">Blogs</h3>
+    </div>
+    <table class="table">
+      <thead>
+      <tr class="filters">
+        <th><input type="text" class="form-control" placeholder="username" disabled></th>
+        <th><input type="text" class="form-control" placeholder="fullname" disabled></th>
+        <th><input type="text" class="form-control" placeholder="role" disabled></th>
+        <th><input type="text" class="form-control" placeholder="" disabled></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.username}}</td>
+        <td>{{user.fullName}}</td>
+        <td *ngIf="user.role === 1">Admin</td>
+        <td *ngIf="user.role === 2">Author</td>
+        <td>
+          <a routerLink="/admin/user/{{user.username}}">edit</a> -
+          <button style="border: none" (click)="onDelete(user.username)">delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

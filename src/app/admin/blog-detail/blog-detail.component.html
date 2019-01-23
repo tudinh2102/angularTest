@@ -1,0 +1,113 @@
+<h4 align="center">-- {{title}} --</h4>
+<div>
+  <form novalidate (ngSubmit)="onSubmit()" [formGroup]="blogForm">
+    <div class="col-md-9">
+      <div class="form-group" *ngIf="id > 0">
+        <label>id:</label>
+        <input  disabled type="text" class="form-control"  formControlName="id">
+      </div>
+      <div class="form-group">
+        <label for="title">Category:</label>
+        <select id="inputState" class="form-control" (change)="onChange($event.target.value) "formControlName="categoryId">
+          <option *ngFor="let category of categorys" value="{{category.id}}">
+            {{category.name}}
+          </option>
+        </select>
+      </div>
+      <!--loi null-->
+      <div class="col alert alert-danger" role="alert"
+           *ngIf="blogForm.get('categoryId')?.errors?.required && blogForm.get('categoryId')?.touched">
+        Usernane is required!
+      </div>
+
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" placeholder="Enter Title" formControlName="title">
+      </div>
+      <!--loi null-->
+      <div class="col alert alert-danger" role="alert"
+           *ngIf="blogForm.get('title')?.errors?.required && blogForm.get('title')?.touched">
+        Title is required!
+      </div>
+
+      <div class="form-group">
+        <label>Describe:</label>
+        <angular-editor formControlName="htmlContent" [config]="editorConfig" rows="7" formControlName="describe"></angular-editor>
+      </div>
+      <!--loi null-->
+      <div class="col alert alert-danger" role="alert"
+           *ngIf="blogForm.get('describe')?.errors?.required && blogForm.get('describe')?.touched">
+        describe is required!
+      </div>
+
+      <div class="form-group">
+        <label>Body:</label>
+        <angular-editor formControlName="htmlContent" [config]="editorConfig" rows="15" formControlName="body"></angular-editor>
+      </div>
+      <!--loi null-->
+      <div class="col alert alert-danger" role="alert"
+           *ngIf="blogForm.get('body')?.errors?.required && blogForm.get('body')?.touched">
+        body is required!
+      </div>
+
+      <hr>
+      <div class="form-group" align="center">
+        <button type="submit" class="btn btn-default btn btn-info">Submit</button>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="title">Trạng thái:</label>
+        <select class="form-control" (change)="onChange($event.target.value)" formControlName="status">
+          <option value="1">Public</option>
+          <option value="0">Private</option>
+        </select>
+      </div>
+      <div class="form-group" *ngIf="roleUser === 1">
+        <label for="title">Approve:</label>
+        <select class="form-control" (change)="onChange($event.target.value)" formControlName="approve">
+          <option value="1">Approve</option>
+          <option value="2">Unapprove</option>
+          <option value="3">null</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="title">Img:</label>
+        <img src="" alt="" id="imga" style="width: 255px; padding-bottom: 20px">
+        <input type="text" class="form-control"  (change)="setImg($event.target.value)" formControlName="image" />
+      </div>
+
+      <div class="form-group" *ngIf="id > 0">
+        <label>View:</label>
+        <input  disabled type="number" class="form-control"  formControlName="view">
+      </div>
+      <div class="form-group" *ngIf="id > 0">
+        <label>Time Approver:</label>
+        <input  disabled type="text" class="form-control"   formControlName="timeApprover">
+      </div>
+      <div class="form-group" *ngIf="id > 0">
+        <label>Time Create:</label>
+        <input  disabled type="text" class="form-control" formControlName="timeCreate">
+      </div>
+      <div class="form-group" *ngIf="id > 0">
+        <label>User Create:</label>
+        <input  disabled type="text" class="form-control"  formControlName="userCreate">
+      </div>
+      <div class="form-group" *ngIf="id > 0">
+        <label>Time Update:</label>
+        <input  disabled type="text" class="form-control"  formControlName="timeUpdate">
+      </div>
+      <div class="form-group" *ngIf="id > 0">
+        <label>User Update:</label>
+        <input  disabled type="text" class="form-control"  formControlName="userUpdate">
+      </div>
+
+      <div class="form-group">
+        <label>preview:</label>
+        <a href="/view-blog/{{blog.id}}" (click)="onPreview()" class="form-control btn btn-primary" target="_blank">preview</a>
+      </div>
+
+    </div>
+  </form>
+</div>

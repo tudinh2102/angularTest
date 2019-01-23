@@ -5,6 +5,8 @@ import {BlogDetailComponent} from './blog-detail/blog-detail.component';
 import {UserListComponent} from './user-list/user-list.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
 import {AdminComponent} from './admin.component';
+import {AuthGuard} from '../auth.guard';
+import {SetupWebsiteComponent} from './setup-website/setup-website.component';
 
 const adminRoutes: Routes = [
 
@@ -24,18 +26,28 @@ const adminRoutes: Routes = [
         component: BlogListComponent
       },
       {
+        path: 'p/:id',
+        component: BlogListComponent
+      },
+      {
         path: 'blog/:id',
         // canActivate: [AuthGuard],
         component: BlogDetailComponent
       },
       {
         path: 'user-list',
+        canActivate: [AuthGuard],
         component: UserListComponent
       },
       {
         path: 'user/:username',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         component: UserDetailComponent
+      },
+      {
+        path: 'setup',
+        canActivate: [AuthGuard],
+        component: SetupWebsiteComponent
       }
     ]
   }

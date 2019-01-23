@@ -1,0 +1,47 @@
+h2{
+  text-align: center;
+}
+
+.container{
+  padding-top: 0;
+  margin-top: -19px;
+}
+
+.left{
+  background: #ecf0f1;
+}
+
+@media(max-width: 992px) {
+  .left{
+    margin-top: 0;
+  }
+}
+
+.right{
+
+}
+
+.blog{
+  border-bottom: 1px solid antiquewhite;
+  padding: 20px 0;
+}
+
+.noi-dung{
+  background: #ecf0f1;
+  margin-top: -20px;
+  width: 550px;
+  position: inherit;
+}
+
+.noi-dung > p{
+  padding-left: 10px;
+}
+
+.img-blog{
+
+}
+
+.language > ul > li{
+  display: inline-table;
+  padding-right: 5px;
+}
