@@ -1,0 +1,46 @@
+<app-header></app-header>
+<div class="container" style="padding-left: 0; padding-right: 0">
+  <div class="col-md-12" style="padding-left: 0; padding-right: 0">
+    <div class="col-md-3 col-xs-12 left">
+      <app-category></app-category>
+    </div>
+    <div class="col-md-7 col-xs-12 right">
+
+      <div class="col-md-12 blog" align="center">
+        <a routerLink="/view-blog/{{blog.id}}">
+          <img class="img-blog" src="{{blog.image}}" alt="" width="650px" />
+        </a>
+        <div class="noi-dung">
+          <p align="left">
+            <a routerLink="/category-blog/{{blog.categoryId}}"><span>{{getCategoryById(blog.categoryId).name}}</span></a> -
+            <a routerLink="/author-blog/{{blog.userCreate}}"><span>{{blog.userCreate}}</span></a> -
+            <span align="left" style="padding-left: 5px"><i>views: {{blog.view}}</i></span> -
+            <span align="left" style="padding-left: 5px"><i>views: {{blog.timeCreate}}</i></span>
+          </p>
+          <a routerLink="/view-blog/{{blog.id}}"><h3 align="center">{{blog.title}}</h3></a>
+          <p align="left">{{blog.body}} ... </p>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-2" style="padding-top: 82px">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="search ...">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-footer p-0" align="center">
+  <nav aria-label="...">
+    <ul class="pagination justify-content-end mt-3 mr-3">
+      <li class="page-item" *ngFor="let i of countPage">
+        <a class="page-link" (click)="nextPage($event.target.innerText)" routerLink="/home/{{i}}">{{i}}</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+
+
+<app-footer></app-footer>
