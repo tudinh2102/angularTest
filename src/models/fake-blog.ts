@@ -24,7 +24,7 @@ export const faceBlog: Blog[] = [
     'timeUpdate': null,
     'userUpdate': null,
     'view': 1,
-    'image': null,
+    'image': 'http://thuthuatphanmem.vn/uploads/2018/09/11/hinh-anh-dep-60_044135017.jpg',
   },
   {
     'categoryId': 1,
@@ -51,7 +51,7 @@ export const faceBlog: Blog[] = [
     'timeUpdate': null,
     'userUpdate': null,
     'view': 1,
-    'image': null,
+    'image': 'http://sohanews.sohacdn.com/thumb_w/660/2015/20-1444234885340-0-0-306-600-crop-1444236958584.jpeg',
   },
   {
     'categoryId': 1,
@@ -76,7 +76,7 @@ export const faceBlog: Blog[] = [
     'timeUpdate': null,
     'userUpdate': null,
     'view': 1,
-    'image': null,
+    'image': 'http://thuthuatphanmem.vn/uploads/2018/09/11/hinh-anh-dep-60_044135017.jpg',
   },
   {
     'categoryId': 2,
@@ -103,7 +103,7 @@ export const faceBlog: Blog[] = [
     'timeUpdate': null,
     'userUpdate': null,
     'view': 1,
-    'image': null,
+    'image': 'https://www.elle.vn/wp-content/uploads/2018/06/27/elle-viet-nam-anh-chup-khoanh-khac-1.jpg',
   },
   {
     'categoryId': 2,
@@ -156,6 +156,6 @@ export const faceBlog: Blog[] = [
     'timeUpdate': null,
     'userUpdate': null,
     'view': 1,
-    'image': null,
+    'image': 'https://www.elle.vn/wp-content/uploads/2018/06/27/elle-viet-nam-anh-chup-khoanh-khac-1.jpg',
   },
 ];

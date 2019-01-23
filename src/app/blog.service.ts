@@ -64,8 +64,12 @@ export class BlogService {
     this.getDataAll();
 
     // xu ly loc theo 3 gia tri
-    const us = JSON.parse(localStorage.getItem('login'))[0].username;
-    // @ts-ignore
+    const us = null;
+    if (JSON.parse(localStorage.getItem('login'))) {
+      // @ts-ignore
+      us = JSON.parse(localStorage.getItem('login'))[0].username;
+    }
+
     const blogList = JSON.parse(localStorage.getItem('blogs')).filter(blog => blog.status > 0 || blog.userCreate === us);
 
     if (+categoryId !== 0) {

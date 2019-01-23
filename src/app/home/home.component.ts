@@ -16,9 +16,13 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class HomeComponent implements OnInit {
 
-  setup = JSON.parse(localStorage.getItem('setup'));
+  setup = {
+    'title:': '',
+    'dateFormat': '',
+    'countBlog': 0
+  };
   indexPage: number;
-  countBlog = this.setup.countBlog;
+  countBlog: number;
   countPage: number[];
   blogs: Blog[];
   categorys: Category[];
@@ -36,7 +40,7 @@ export class HomeComponent implements OnInit {
     private filterPipe: FilterPipe,
     private translate: TranslateService
   ) {
-      translate.setDefaultLang('vie');
+    translate.setDefaultLang('vie');
   }
 
   ngOnInit() {
@@ -46,6 +50,20 @@ export class HomeComponent implements OnInit {
 
     // xoa doi tuọng preview
     localStorage.removeItem('previewBlog');
+
+    if (!localStorage.getItem('setup')) {
+      const setup = {
+        'title': 'Trang Blog',
+        'dateFormat': 'dd/MM/yyyy',
+        'countBlog': 10,
+      };
+      localStorage.setItem('setup', JSON.stringify(setup));
+    }
+
+    this.setup = JSON.parse(localStorage.getItem('setup'));
+    this.countBlog = this.setup.countBlog;
+
+    console.log(this.countBlog);
 
     console.log('userLogin: ');
     console.log(JSON.parse(localStorage.getItem('login')));
@@ -76,15 +94,6 @@ export class HomeComponent implements OnInit {
   getData(): void {
     if (!localStorage.getItem('users')) {
       localStorage.setItem('users', JSON.stringify(fakeUser));
-    }
-
-    if (!localStorage.getItem('setup')) {
-      const setup = {
-        'title': 'Trang Blog',
-        'dateFormat': 'dd/MM/yyyy',
-        'countBlog': 10,
-      };
-      localStorage.setItem('setup', JSON.stringify(setup));
     }
   }
 
